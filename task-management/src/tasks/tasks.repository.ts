@@ -1,5 +1,6 @@
 import { Task } from './task.entity';
-import { Repository, EntityRepository } from 'typeorm';
+import { Repository } from 'typeorm';
+import { CustomRepository } from 'src/database/typeorm-ex.decorator';
 
-@EntityRepository(Task)
+@CustomRepository(Task)
 export class TasksRepository extends Repository<Task> {}
