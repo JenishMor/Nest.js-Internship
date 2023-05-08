@@ -42,6 +42,10 @@ export class TasksService {
   //     return tasks;
   //   }
 
+  getTasks(filterDto: GetTasksFilterDto): Promise<Task[]> {
+    return this.tasksRepository.getTasks(filterDto);
+  }
+
   async getTaskById(id: string): Promise<Task> {
     const found = await this.tasksRepository.findOneBy({ id });
     if (!found) {
