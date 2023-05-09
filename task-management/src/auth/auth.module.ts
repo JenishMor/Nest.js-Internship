@@ -7,18 +7,20 @@ import { TypeOrmExModule } from 'src/database/typeorm-ex.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
+import { JwtStrategy } from './jwt.strategy';
 
 @Module({
   imports: [
     PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.register({
-      secret: 'ourtopsecret34',
+      secret: 'mytopsecret34',
       signOptions: { expiresIn: 3600 },
     }),
     TypeOrmExModule.forCustomRepository([UserRepository]),
     TypeOrmModule.forFeature([User]),
   ],
-  providers: [AuthService],
+  providers: [AuthService, JwtStrategy],
   controllers: [AuthController],
+  exports: [JwtStrategy, PassportModule],
 })
 export class AuthModule {}
